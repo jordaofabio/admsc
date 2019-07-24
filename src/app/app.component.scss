@@ -1,4 +1,23 @@
-app-sidebar {
+
+
+.global {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
     flex: 1;
     height: 100%;
+}
+
+.groupRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: #FFF;
+    padding: 10px;
 }

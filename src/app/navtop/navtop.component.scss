@@ -1,0 +1,38 @@
+.navtop {
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    background: #333;
+    color: #FFF;
+    padding-left: 10px;
+    justify-content: flex-end;
+}
+
+.sidenav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.sidenav ul {
+    display: inline-block;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #333333;
+  }
+  
+.sidenav li {
+    list-style-type: none;
+    float: left;
+}
+
+.sidenav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sidenav li a:hover {
+background-color: #111111;
+}
