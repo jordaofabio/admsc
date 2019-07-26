@@ -1,1 +1,29 @@
-<p>users works!</p>
+<h1>Usuários</h1>
+<span class="add"> <a [routerLink]="['/users/new']"><i class="fas fa-plus-circle fa-1g"></i></a></span>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Nível de Acesso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i=index">
+        <td>
+            {{user.firstname}} {{user.lastname}}
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.phone}}
+          </td>
+          <td>
+            {{user.hierarchical_level}}
+          </td> 
+      </tr>
+      
+    </tbody>
+  </table>

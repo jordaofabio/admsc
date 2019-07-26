@@ -1,5 +1,7 @@
 
-
+app-sidebar {
+    z-index: 9999;
+}
 .global {
     box-sizing: border-box;
     display: flex;
@@ -20,4 +22,8 @@ main {
     flex: 1;
     background: #FFF;
     padding: 10px;
+}
+.content {
+    max-width: 1000px;
+    padding: 15px;
 }
