@@ -17,11 +17,9 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-
     this.userService.getUsers().subscribe(ret => {
-      debugger
       this.users = ret;
     });
-
   }
+
 }

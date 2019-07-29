@@ -10,8 +10,13 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    debugger
     const url = `${environment.API_URL}/user`;
     return this.http.get(url);
+  }
+
+  postUser(data: any) {
+
+    const url = `${environment.API_URL}/user`;
+    return this.http.post(url, data);
   }
 }
