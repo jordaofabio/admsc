@@ -25,6 +25,7 @@ export class FormUserComponent implements OnInit {
       email: [user.email, [Validators.email]],
       password: [user.password, [Validators.required]],
       phone: [user.phone, [Validators.maxLength(50)]],
+      photo: [user.photo],
       level: [user.level]
     });
   }

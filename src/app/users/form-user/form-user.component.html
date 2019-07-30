@@ -15,6 +15,19 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
     </div>
+    <div class="form-group">
+      <label for="Select1">Tipo de usuário</label>
+      <select class="form-control" id="elect1" name="level" formControlName="level">
+        <option value="4">Apenas voluntário</option>
+        <option value="3">Editor</option>
+        <option value="2">Gerente</option>
+        <option value="1">Master</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="filePhoto">Foto</label>
+      <input type="file" class="form-control-file" id="filePhoto" name="photo" formControlName="photo">
+    </div>
     <!-- <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
