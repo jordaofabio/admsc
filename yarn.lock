@@ -320,6 +320,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.19"
 
+"@iplab/ngx-file-upload@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@iplab/ngx-file-upload/-/ngx-file-upload-1.4.0.tgz#619e2c7330a6db98de312c3bf3f7cff570c49f2c"
+  integrity sha512-8HxL/lnT84ZlHNENyf+l73p/0MR2x1B8r8A628x4HWRflhyJTZ20EyeXwiTVKOpWhdjbP6+g3TkyAfySdeRP9A==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@8.1.2":
   version "8.1.2"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.1.2.tgz#5f96371d51a7f338a29990916b5b77f55bbf1ca6"

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+import { FileUploadValidators } from '@iplab/ngx-file-upload';
+
 @Component({
   selector: 'app-form-user',
   templateUrl: './form-user.component.html',
@@ -11,6 +13,7 @@ export class FormUserComponent implements OnInit {
 
   user: User;
   formUser: FormGroup;
+  private filesControl = new FormControl(null, FileUploadValidators.filesLimit(2))
 
   constructor(private userService: UsersService, private formBuilder: FormBuilder) { }
 
@@ -42,7 +45,7 @@ export class FormUserComponent implements OnInit {
     reader.onerror = (error) => {
       console.log('Error: ', error);
     };
- }
+  }
 
   enviar() {
     const contForm = this.formUser;
