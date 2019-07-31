@@ -30,6 +30,20 @@ export class FormUserComponent implements OnInit {
     });
   }
 
+  getBase64(event) {
+    debugger;
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      // me.modelvalue = reader.result;
+      console.log(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+ }
+
   enviar() {
     const contForm = this.formUser;
     debugger;
