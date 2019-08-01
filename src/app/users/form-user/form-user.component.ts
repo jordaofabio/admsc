@@ -47,6 +47,29 @@ export class FormUserComponent implements OnInit {
     };
   }
 
+  uploadDocument(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.formUser.get('photo').setValue(event.target.files[0]);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  onSubmit(): void {
+    const uploadData = new FormData();
+    const firstname = this.formUser.get('name').value.split(' ')[0];
+    const lastname = this.formUser.get('name').value.substring(firstname.length, this.formUser.get('name').value.length).trim();
+    uploadData.append('firstname', firstname);
+    uploadData.append('lastname', lastname);
+    uploadData.append('email', this.formUser.get('email').value);
+    uploadData.append('phone', this.formUser.get('phone').value);
+    uploadData.append('level', this.formUser.get('level').value);
+    uploadData.append('photo', this.formUser.get('photo').value);
+    this.userService.postUser(uploadData);
+  }
+
   enviar() {
     const contForm = this.formUser;
     debugger;

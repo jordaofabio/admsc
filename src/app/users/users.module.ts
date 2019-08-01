@@ -16,9 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
     FileUploadModule,
-    BrowserAnimationsModule
   ]
 })
 export class UsersModule { }
