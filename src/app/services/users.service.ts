@@ -15,8 +15,9 @@ export class UsersService {
   }
 
   postUser(data: any) {
-debugger
+    const porra = data.value;
+    debugger  
     const url = `${environment.API_URL}/user`;
-    return this.http.post(url, data);
+    return this.http.post(url, porra);
   }
 }

@@ -1,7 +1,11 @@
  <form [formGroup]="formUser" > <!-- (ngSubmit)="enviar()"> -->
     <div class="form-group">
       <label for="exampleInputEmail1">Nome</label>
-      <input type="name" class="form-control" name="name" formControlName="name" placeholder="Nome">
+      <input type="name" class="form-control" name="firstname" formControlName="firstname" placeholder="Nome">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Sobrenome</label>
+      <input type="name" class="form-control" name="lastname" formControlName="lastname" placeholder="Sobrenome">
     </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
@@ -27,8 +31,8 @@
     <div class="form-group">
       <label for="filePhoto">Foto</label>
       <!-- <input type="file" class="form-control-file" id="filePhoto" name="photo" formControlName="photo" (change)="getBase64($event)"> -->
-      <input (change)="uploadDocument($event)" type="file" accept=".png, .pdf, .jpg, .jpeg"> <br>
-      <input  type="submit" value="Send file">
+      <!-- <input (change)="uploadDocument($event)" type="file" accept=".png, .pdf, .jpg, .jpeg"> <br> -->
+      <file-upload formControlName="photo"></file-upload>
       <!-- <file-upload formControlName="photo"></file-upload> -->
     </div>
     <!-- <div class="form-group form-check">
