@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { User, ConfirmUser } from '../models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -8,18 +9,46 @@ import { UsersService } from '../services/users.service';
 })
 export class UsersComponent implements OnInit {
 
-  users: any;
-
+  users: User[];
+  confirmUser: ConfirmUser;
+  hideModal = true;
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
+    this.confirmUser = new ConfirmUser();
     this.getUsers();
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe(ret => {
+    this.userService.getUsers().subscribe((ret: User[]) => {
       this.users = ret;
     });
+  }
+
+
+  Confirm(user: User) {
+    this.hideModal = false;
+    debugger;
+    this.confirmUser = new ConfirmUser();
+    this.confirmUser = {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      photo: user.photo
+    };
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.confirmUser.id).subscribe(
+      (ret: any) => {
+        console.log(ret);
+        this.hideModal = true;
+        this.users.splice(this.users.findIndex(x => x.id === this.confirmUser.id), 1);
+        debugger;
+
+      }
+    );
   }
 
 }

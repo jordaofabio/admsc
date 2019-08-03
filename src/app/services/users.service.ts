@@ -9,15 +9,21 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
+  urlDefault = `${environment.API_URL}/user`;
+
   getUsers() {
-    const url = `${environment.API_URL}/user`;
-    return this.http.get(url);
+    return this.http.get(this.urlDefault);
   }
 
-  postUser(data: any) {
-    const porra = data.value;
-    debugger  
-    const url = `${environment.API_URL}/user`;
-    return this.http.post(url, porra);
+  postUser(data: FormData) {
+    return this.http.post(this.urlDefault, data);
+  }
+
+  putUser(data: FormData) {
+    return this.http.put(this.urlDefault, data);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.urlDefault}/${id}`);
   }
 }

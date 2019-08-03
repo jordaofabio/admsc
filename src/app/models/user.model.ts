@@ -1,11 +1,20 @@
 export class User {
+    id: number;
     firstname: string;
     lastname: string;
     email: string;
-    phone?: string;
-    photo?: string;
-    password?: string;
-    level?: number;
-    enabled?: boolean;
+    phone: string | null;
+    photo: File | null;
+    password: string | null;
+    level: number | null;
+    enabled: boolean;
 
+}
+
+export class ConfirmUser {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    photo: File | null;
 }

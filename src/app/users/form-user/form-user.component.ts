@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { FileUploadValidators, FileUploadControl } from '@iplab/ngx-file-upload';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-user',
@@ -13,9 +14,10 @@ export class FormUserComponent implements OnInit {
 
   user: User;
   formUser: FormGroup;
-  private filesControl = new FormControl(null, FileUploadValidators.filesLimit(2));
+  private filesControl = new FormControl(null, FileUploadValidators.filesLimit(1));
+  fileData: File;
 
-  constructor(private userService: UsersService, private formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, private userService: UsersService, private formBuilder: FormBuilder) {
     this.user = new User();
 
     this.formUser = this.formBuilder.group({
@@ -37,20 +39,6 @@ export class FormUserComponent implements OnInit {
 
   }
 
-  getBase64(event) {
-    debugger;
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      // me.modelvalue = reader.result;
-      console.log(reader.result);
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
-  }
-
   uploadDocument(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -62,26 +50,24 @@ export class FormUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // const uploadData = new User();
-    // uploadData.firstname = this.formUser.get('firstname').value;
-    // uploadData.lastname = this.formUser.get('lastname').value;
-    // uploadData.email = this.formUser.get('email').value;
-    // uploadData.phone = this.formUser.get('phone').value;
-    // uploadData.level = this.formUser.get('level').value;
-    // uploadData.photo = this.formUser.get('photo').value;
+    const uploadData = new FormData();
+    this.fileData = this.formUser.get('photo').value;
 
-    this.userService.postUser(this.formUser).subscribe(
+    uploadData.append('firstname', this.formUser.get('firstname').value);
+    uploadData.append('lastname', this.formUser.get('lastname').value);
+    uploadData.append('email', this.formUser.get('email').value);
+    uploadData.append('phone', this.formUser.get('phone').value);
+    uploadData.append('password', this.formUser.get('password').value);
+    uploadData.append('level', this.formUser.get('level').value);
+    uploadData.append('photo', this.fileData[0], this.fileData[0].name);
+
+    this.userService.postUser(uploadData).subscribe(
       (ret: any) => {
         console.log(ret);
         debugger;
 
       }
     );
-  }
-
-  enviar() {
-    const contForm = this.formUser;
-    debugger;
   }
 
 }
