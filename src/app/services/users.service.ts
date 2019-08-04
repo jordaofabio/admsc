@@ -15,6 +15,10 @@ export class UsersService {
     return this.http.get(this.urlDefault);
   }
 
+  getUser(id: number) {
+    return this.http.get(`${this.urlDefault}/${id}`);
+  }
+
   postUser(data: FormData) {
     return this.http.post(this.urlDefault, data);
   }

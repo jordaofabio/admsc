@@ -1,4 +1,6 @@
- <form [formGroup]="formUser" > <!-- (ngSubmit)="enviar()"> -->
+<form [formGroup]="formUser" > <!-- (ngSubmit)="enviar()"> -->
+  <input type="hidden" class="form-control" name="id" formControlName="id">
+
     <div class="form-group">
       <label for="exampleInputEmail1">Nome</label>
       <input type="name" class="form-control" name="firstname" formControlName="firstname" placeholder="Nome">
@@ -8,7 +10,7 @@
       <input type="name" class="form-control" name="lastname" formControlName="lastname" placeholder="Sobrenome">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
+      <label for="exampleInputEmail1">E-mail</label>
       <input type="email" class="form-control" name="email" formControlName="email" placeholder="E-mail">
     </div>
     <div class="form-group">
@@ -16,16 +18,13 @@
       <input type="phone" class="form-control" name="phone" formControlName="phone" placeholder="Telefone">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" name="password" formControlName="password" placeholder="Password">
+      <label for="exampleInputPassword1">Senha</label>
+      <input type="password" class="form-control" name="password" formControlName="password" placeholder="Senha">
     </div>
     <div class="form-group">
       <label for="Select1">Tipo de usuário</label>
       <select class="form-control" id="elect1" name="level" formControlName="level">
-        <option value="4">Apenas voluntário</option>
-        <option value="3">Editor</option>
-        <option value="2">Gerente</option>
-        <option value="1">Master</option>
+        <option *ngFor="let level of levels; let i=index" value="{{level.id}}">{{level.title}}</option>
       </select>
     </div>
     <div class="form-group">
@@ -34,9 +33,9 @@
       <!-- <input (change)="onSubmit($event)" type="file" accept=".png, .pdf, .jpg, .jpeg"> <br> -->
       <file-upload formControlName="photo"></file-upload>
     </div>
-    <!-- <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div> -->
-    <button type="submit" (click)="onSubmit($event)" class="btn btn-primary">Submit</button>
+    <div class="form-group form-check">
+      <input type="checkbox" formControlName="enabled" class="form-check-input" [checked]="true" id="enabled">
+      <label class="form-check-label" for="enabled">Ativo</label>
+    </div>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
   </form>

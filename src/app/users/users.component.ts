@@ -28,7 +28,6 @@ export class UsersComponent implements OnInit {
 
   Confirm(user: User) {
     this.hideModal = false;
-    debugger;
     this.confirmUser = new ConfirmUser();
     this.confirmUser = {
       id: user.id,
@@ -42,11 +41,8 @@ export class UsersComponent implements OnInit {
   deleteUser() {
     this.userService.deleteUser(this.confirmUser.id).subscribe(
       (ret: any) => {
-        console.log(ret);
         this.hideModal = true;
         this.users.splice(this.users.findIndex(x => x.id === this.confirmUser.id), 1);
-        debugger;
-
       }
     );
   }

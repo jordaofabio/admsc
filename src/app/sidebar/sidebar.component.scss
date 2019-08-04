@@ -16,3 +16,10 @@
 .logo {
     margin-bottom: 20px;
 }
+
+.nav-link {
+    border-bottom: solid 1px #ebe7e7; 
+    &:hover {
+    background-color: #e6e4e4
+    }
+}
