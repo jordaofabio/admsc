@@ -1,1 +1,44 @@
-<p>pages works!</p>
+<h1>Páginas</h1>
+<span class="add"> <a [routerLink]="['/pages/new']" class="btn btn-primary btn-sm">Nova página <i class="fas fa-file-alt fa-sm"></i></a>
+</span>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let page of pages; let i=index">
+        <td>
+            {{page.title}}
+          </td>
+          <td class="text-right">
+            <a routerLink="/pages/edit/{{page.id}}" class="page-actions edit"><i class="fas fa-pen"></i></a>
+            <a (click)="Confirm(page)" href="" data-toggle="modal" data-target="#ModalConfirm" class="page-actions delete"><i class="fas fa-trash"></i></a>
+          </td> 
+      </tr>
+      
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="Confirmação" attr.aria-hidden="{{hideModal}}">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalConfirmCenterTitle">Confirmação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirme a exclusão da página {{confirmPage.title}}.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="deletePage()" data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

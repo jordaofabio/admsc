@@ -29,7 +29,7 @@
           <td>
             {{user.enabled ? 'Ativo' : 'Inativo'}}
           </td> 
-          <td>
+          <td  class="text-right">
             <a routerLink="/users/edit/{{user.id}}" class="user-actions edit"><i class="fas fa-pen"></i></a>
             <a (click)="Confirm(user)" href="" data-toggle="modal" data-target="#ModalConfirm" class="user-actions delete"><i class="fas fa-trash"></i></a>
           </td> 
