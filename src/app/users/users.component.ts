@@ -20,8 +20,8 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe((ret: User[]) => {
-      this.users = ret;
+    this.userService.getUsers().subscribe((ret: any) => {
+      this.users = ret.rows;
     });
   }
 
