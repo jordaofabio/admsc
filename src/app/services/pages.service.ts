@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
+import { Page } from '../models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +21,12 @@ export class PagesService {
       return this.http.get(`${this.urlDefault}/${id}`);
   }
 
-  postPage(data: FormData) {
+  postPage(data: Page) {
+    debugger
     return this.http.post(this.urlDefault, data);
   }
 
-  putPage(data: FormData) {
+  putPage(data: Page) {
     return this.http.put(this.urlDefault, data);
   }
 

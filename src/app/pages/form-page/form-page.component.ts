@@ -55,21 +55,17 @@ export class FormPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const uploadData = new FormData();
-    uploadData.append('id', this.formPage.get('id').value);
-    uploadData.append('title', this.formPage.get('title').value);
-    uploadData.append('summary', this.formPage.get('summary').value);
-    uploadData.append('content', this.formPage.get('content').value);
 
+    debugger
     if (this.type === 'new') {
-      this.pageService.postPage(uploadData).subscribe(
+      this.pageService.postPage(this.formPage.value).subscribe(
         (ret: any) => {
           this.filesControl.setValue([]);
           this.createForm();
         }
       );
     } else {
-      this.pageService.putPage(uploadData).subscribe(
+      this.pageService.putPage(this.formPage.value).subscribe(
         (ret: any) => {
           console.log(ret);
           this.filesControl.setValue([]);
