@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { AccessLevelsService } from 'src/app/services/access-levels.service';
 import { AccessLevel } from 'src/app/models/access-level.model';
 import { ActivatedRoute } from '@angular/router';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CloudinaryImageUploadAdapter } from 'ckeditor-cloudinary-uploader-adapter';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-form-page',
@@ -27,11 +26,47 @@ export class FormPageComponent implements OnInit {
   idPage: number;
   type = 'new';
   isChecked = true;
-  public Editor = ClassicEditor;
-  editorConfig = {
-    placeholder: 'Insira o conteúdo aqui.',
-    extraPlugins: [ this.imagePluginFactory ]
-  };
+
+  public editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: true,
+    toolbarPosition: 'top',
+};
 
   constructor(private http: HttpClient,
               private pageService: PagesService,
@@ -58,17 +93,12 @@ export class FormPageComponent implements OnInit {
     this.formPage = this.formBuilder.group({
       id: [this.page.id],
       title: [this.page.title, [Validators.required]],
-      // content: [this.page.content, [Validators.required]],
+      content: [this.page.content, [Validators.required]],
       summary: [this.page.summary, [Validators.maxLength(50)]],
     });
     this.page.content = this.type === 'new' ? '' : this.page.content;
   }
 
-  imagePluginFactory(editor) {
-    editor.plugins.get( './' ).createUploadAdapter = ( loader ) => {
-      return new CloudinaryImageUploadAdapter( loader, 'http://localhost:3000/page', '');
-    };
-  }
 
   onSubmit(): void {
 

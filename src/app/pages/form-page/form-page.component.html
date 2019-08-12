@@ -12,7 +12,7 @@
     </form>
     <div class="form-group">
       <label for="content">Conteúdo</label>
-    <ckeditor id="content" [config]="editorConfig" [editor]="Editor" [(ngModel)]="page.content"></ckeditor>    
+      <angular-editor formControlName="content" [config]="editorConfig"></angular-editor>
 
     </div>
     <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>

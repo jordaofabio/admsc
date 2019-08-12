@@ -301,13 +301,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ckeditor/ckeditor5-angular@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-angular/-/ckeditor5-angular-1.1.0.tgz#f1ba15b4eab1315a357bb6718b6e6c1582b5e52f"
-  integrity sha512-6b9NX/PhFuQKo/mR0tSpCVNGU1fhg1Y8ju5OBWxCPpIbdDZIIoqjHlhWL76EmfztteouYLACsnfrnqVQGC0utA==
-  dependencies:
-    tslib "^1.9.0"
-
 "@ckeditor/ckeditor5-build-classic@^12.3.1":
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-12.3.1.tgz#b37011d5ee2f2590cf8d29a43dc5c62f14cf0b5a"
@@ -455,6 +448,13 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@iplab/ngx-file-upload/-/ngx-file-upload-1.4.0.tgz#619e2c7330a6db98de312c3bf3f7cff570c49f2c"
   integrity sha512-8HxL/lnT84ZlHNENyf+l73p/0MR2x1B8r8A628x4HWRflhyJTZ20EyeXwiTVKOpWhdjbP6+g3TkyAfySdeRP9A==
+  dependencies:
+    tslib "^1.9.0"
+
+"@kolkov/angular-editor@^0.18.4":
+  version "0.18.4"
+  resolved "https://registry.yarnpkg.com/@kolkov/angular-editor/-/angular-editor-0.18.4.tgz#a465d356847289193a8c88cd1730e8f011304cef"
+  integrity sha512-Kjs3+M+JepLO3u5WHfmj8Nff7c+QB/W3nLxDnNEJIvoYp7QTNq1oUE/ZY9yWhG8THH/3v4Vwi744UHRqZXlVgg==
   dependencies:
     tslib "^1.9.0"
 
@@ -1645,11 +1645,6 @@ circular-dependency-plugin@5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/circular-dependency-plugin/-/circular-dependency-plugin-5.0.2.tgz#da168c0b37e7b43563fb9f912c1c007c213389ef"
   integrity sha512-oC7/DVAyfcY3UWKm0sN/oVoDedQDQiw/vIiAnuTWTpE5s0zWf7l3WY417Xw/Fbi/QbAjctAkxgMiS9P0s3zkmA==
-
-ckeditor-cloudinary-uploader-adapter@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/ckeditor-cloudinary-uploader-adapter/-/ckeditor-cloudinary-uploader-adapter-1.1.3.tgz#43d558000f01c825316a932e82fd6ca9beb0689e"
-  integrity sha512-EqRteiFmMiCeQExBxU3xY50+nF7YNAyyc1EtlGLqbvHY9ILyw2lTTIu4COkc4zM8aNAhyumHUScU6d60Y1JEJQ==
 
 ckeditor5-simple-upload@^1.0.6:
   version "1.0.6"

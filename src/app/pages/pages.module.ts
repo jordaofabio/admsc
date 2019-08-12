@@ -6,13 +6,14 @@ import { PagesComponent } from './pages.component';
 import { FormPageComponent } from './form-page/form-page.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { HttpClientModule} from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [PagesComponent, FormPageComponent],
   imports: [
-    CKEditorModule,
+    HttpClientModule,
+    AngularEditorModule,
     CommonModule,
     PagesRoutingModule,
     FormsModule,
@@ -20,4 +21,5 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FileUploadModule,
   ]
 })
+
 export class PagesModule { }
