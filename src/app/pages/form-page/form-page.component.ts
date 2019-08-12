@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { AccessLevelsService } from 'src/app/services/access-levels.service';
 import { AccessLevel } from 'src/app/models/access-level.model';
 import { ActivatedRoute } from '@angular/router';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CloudinaryImageUploadAdapter } from 'ckeditor-cloudinary-uploader-adapter';
 
 @Component({
   selector: 'app-form-page',
@@ -14,7 +16,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./form-page.component.scss']
 })
 export class FormPageComponent implements OnInit {
-
+  public model = {
+    editorData: '<p>Hello, world!</p>'
+};
   page: Page;
   formPage: FormGroup;
   private filesControl: FormControl = new FormControl(null, FileUploadValidators.filesLimit(1));
@@ -23,6 +27,11 @@ export class FormPageComponent implements OnInit {
   idPage: number;
   type = 'new';
   isChecked = true;
+  public Editor = ClassicEditor;
+  editorConfig = {
+    placeholder: 'Insira o conteúdo aqui.',
+    extraPlugins: [ this.imagePluginFactory ]
+  };
 
   constructor(private http: HttpClient,
               private pageService: PagesService,
@@ -36,7 +45,7 @@ export class FormPageComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.paramMap.get('idPage')) {
       this.idPage = parseInt(this.route.snapshot.paramMap.get('idPage'), 10);
-      this.pageService.getPage(this.idPage).subscribe((p: any) => {
+      this.pageService.getPage(this.idPage).subscribe((p: Page) => {
         this.setPage(p);
       });
     }
@@ -49,23 +58,30 @@ export class FormPageComponent implements OnInit {
     this.formPage = this.formBuilder.group({
       id: [this.page.id],
       title: [this.page.title, [Validators.required]],
-      content: [this.page.content, [Validators.required]],
+      // content: [this.page.content, [Validators.required]],
       summary: [this.page.summary, [Validators.maxLength(50)]],
     });
+    this.page.content = this.type === 'new' ? '' : this.page.content;
+  }
+
+  imagePluginFactory(editor) {
+    editor.plugins.get( './' ).createUploadAdapter = ( loader ) => {
+      return new CloudinaryImageUploadAdapter( loader, 'http://localhost:3000/page', '');
+    };
   }
 
   onSubmit(): void {
 
-    debugger
+    const preparePage = {...this.formPage.value, content: this.page.content };
     if (this.type === 'new') {
-      this.pageService.postPage(this.formPage.value).subscribe(
-        (ret: any) => {
+      this.pageService.postPage(preparePage).subscribe(
+        (ret: Page) => {
           this.filesControl.setValue([]);
           this.createForm();
         }
       );
     } else {
-      this.pageService.putPage(this.formPage.value).subscribe(
+      this.pageService.putPage(preparePage).subscribe(
         (ret: any) => {
           console.log(ret);
           this.filesControl.setValue([]);
@@ -75,7 +91,7 @@ export class FormPageComponent implements OnInit {
     }
   }
 
-  setPage(p: any) {
+  setPage(p: Page) {
     this.type = 'edit';
     this.page.id = p.id;
     this.page.title = p.title;
