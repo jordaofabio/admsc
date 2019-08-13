@@ -7,13 +7,13 @@ import { FormPageComponent } from './form-page/form-page.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { HttpClientModule} from '@angular/common/http';
-import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [PagesComponent, FormPageComponent],
   imports: [
     HttpClientModule,
-    AngularEditorModule,
+    CKEditorModule,
     CommonModule,
     PagesRoutingModule,
     FormsModule,

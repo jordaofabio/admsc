@@ -7,7 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { AccessLevelsService } from 'src/app/services/access-levels.service';
 import { AccessLevel } from 'src/app/models/access-level.model';
 import { ActivatedRoute } from '@angular/router';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CloudinaryImageUploadAdapter } from 'ckeditor-cloudinary-uploader-adapter';
 
 @Component({
   selector: 'app-form-page',
@@ -17,7 +18,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class FormPageComponent implements OnInit {
   public model = {
     editorData: '<p>Hello, world!</p>'
-};
+  };
+  public Editor = ClassicEditor;
   page: Page;
   formPage: FormGroup;
   private filesControl: FormControl = new FormControl(null, FileUploadValidators.filesLimit(1));
@@ -27,46 +29,10 @@ export class FormPageComponent implements OnInit {
   type = 'new';
   isChecked = true;
 
-  public editorConfig: AngularEditorConfig = {
-    editable: true,
-      spellcheck: true,
-      height: '400px',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'no',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Insira o conteúdo aqui...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'http://localhost:3000/media',
-    sanitize: true,
-    toolbarPosition: 'top',
-};
+  editorConfig = {
+    placeholder: 'Type the content here!',
+    extraPlugins: [ this.imagePluginFactory ],
+  };
 
   constructor(private http: HttpClient,
               private pageService: PagesService,
@@ -99,6 +65,11 @@ export class FormPageComponent implements OnInit {
     this.page.content = this.type === 'new' ? '' : this.page.content;
   }
 
+  imagePluginFactory(editor) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+      return new CloudinaryImageUploadAdapter( loader, 'your cloud name', 'your unsiged upload preset');
+    };
+  }
 
   onSubmit(): void {
 
