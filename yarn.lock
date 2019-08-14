@@ -301,6 +301,14 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@ckeditor/ckeditor5-adapter-ckfinder@^11.0.4":
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-adapter-ckfinder/-/ckeditor5-adapter-ckfinder-11.0.4.tgz#db295111943519efa6690f83d440ed4083b34e31"
+  integrity sha512-/wpdYrCA3J6MlaqXUUrH/fF5b7g+8Xvlq3bUntTM/GcyeqCFeIJqxumaTIXOuXLobfmVqMKYL1lTrL3WetA2MQ==
+  dependencies:
+    "@ckeditor/ckeditor5-core" "^12.2.1"
+    "@ckeditor/ckeditor5-upload" "^11.1.1"
+
 "@ckeditor/ckeditor5-angular@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-angular/-/ckeditor5-angular-1.1.0.tgz#f1ba15b4eab1315a357bb6718b6e6c1582b5e52f"
@@ -312,6 +320,15 @@
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-12.3.1.tgz#b37011d5ee2f2590cf8d29a43dc5c62f14cf0b5a"
   integrity sha512-nlE8wRasM3AF2XkXHJuj91cq46ZvmTBfXePCtjogT8s/niYlFma+Lqu7cAUONxRXh11m1IpgC6i+QOGFZH0p8A==
+
+"@ckeditor/ckeditor5-ckfinder@^11.0.4":
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-ckfinder/-/ckeditor5-ckfinder-11.0.4.tgz#99ebe4728390c15941617a9a8d37135ab64f6fdf"
+  integrity sha512-1ecCEpx75ryoWZo+OIVII4wQ9pT5Kl+dozwMMW9SOQibnLgRORhzx7Eq1xu/mRtxfQ/GjPekQAJMIca1yW9qYQ==
+  dependencies:
+    "@ckeditor/ckeditor5-adapter-ckfinder" "^11.0.4"
+    "@ckeditor/ckeditor5-core" "^12.2.1"
+    "@ckeditor/ckeditor5-ui" "^13.0.2"
 
 "@ckeditor/ckeditor5-core@^10.0.0":
   version "10.1.0"
@@ -408,6 +425,15 @@
     "@ckeditor/ckeditor5-engine" "^12.0.0"
     "@ckeditor/ckeditor5-ui" "^11.2.0"
     "@ckeditor/ckeditor5-utils" "^11.1.0"
+
+"@ckeditor/ckeditor5-upload@^11.1.1":
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-upload/-/ckeditor5-upload-11.1.1.tgz#d4144de04bd957d677940c3e9e065afe5b023ab7"
+  integrity sha512-uB8DYTw2BJrNPjSWh6u6udlprVeN2BeQbbZiSiIstJSS3q4vr90FPnhZ5lvtwxvo9lMXLMgGZUwz1Nkulj5oSg==
+  dependencies:
+    "@ckeditor/ckeditor5-core" "^12.2.1"
+    "@ckeditor/ckeditor5-ui" "^13.0.2"
+    "@ckeditor/ckeditor5-utils" "^13.0.1"
 
 "@ckeditor/ckeditor5-utils@^10.1.0", "@ckeditor/ckeditor5-utils@^10.2.0":
   version "10.2.1"
@@ -1645,11 +1671,6 @@ circular-dependency-plugin@5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/circular-dependency-plugin/-/circular-dependency-plugin-5.0.2.tgz#da168c0b37e7b43563fb9f912c1c007c213389ef"
   integrity sha512-oC7/DVAyfcY3UWKm0sN/oVoDedQDQiw/vIiAnuTWTpE5s0zWf7l3WY417Xw/Fbi/QbAjctAkxgMiS9P0s3zkmA==
-
-ckeditor-cloudinary-uploader-adapter@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/ckeditor-cloudinary-uploader-adapter/-/ckeditor-cloudinary-uploader-adapter-1.1.3.tgz#43d558000f01c825316a932e82fd6ca9beb0689e"
-  integrity sha512-EqRteiFmMiCeQExBxU3xY50+nF7YNAyyc1EtlGLqbvHY9ILyw2lTTIu4COkc4zM8aNAhyumHUScU6d60Y1JEJQ==
 
 ckeditor5-simple-upload@^1.0.6:
   version "1.0.6"
