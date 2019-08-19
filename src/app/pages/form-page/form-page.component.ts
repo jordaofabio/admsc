@@ -86,7 +86,8 @@ export class FormPageComponent implements OnInit {
     if (this.type === 'new') {
       this.pageService.postPage(preparePage).subscribe(
         (ret: Page) => {
-          this.setPage(ret);
+          this.createForm();
+          this.model.content = '';
         }
       );
     } else {

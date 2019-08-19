@@ -25,4 +25,18 @@ export class PagesComponent implements OnInit {
     });
   }
 
+  Confirm(page: ConfirmPage) {
+    this.hideModal = false;
+    this.confirmPage = page;
+  }
+
+  deletePage() {
+    this.pageService.deletePage(this.confirmPage.id).subscribe(
+      (ret: any) => {
+        this.hideModal = true;
+        this.pages.splice(this.pages.findIndex(x => x.id === this.confirmPage.id), 1);
+      }
+    );
+  }
+
 }
