@@ -1,13 +1,12 @@
-export class Page {
+export class Post {
     id: number;
     title: string;
-    author: number;
-    categories: number[];
+    category: number;
     summary: string;
     content: string;
 }
 
-export class ConfirmPage {
+export class ConfirmPost {
     id: number;
     title: string;
 }
