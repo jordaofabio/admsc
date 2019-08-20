@@ -1,7 +1,9 @@
+import { Category } from './category.model';
+
 export class Post {
     id: number;
     title: string;
-    category: number;
+    categories: Category[];
     summary: string;
     content: string;
 }

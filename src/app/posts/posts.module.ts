@@ -7,6 +7,7 @@ import { FormPostComponent } from './form-post/form-post.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
   ]
 })
 export class PostsModule { }
