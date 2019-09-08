@@ -1,0 +1,21 @@
+<div id="container">
+        <div  class="form-login">
+                <img src="assets/images/logo.png" class="logo" />
+            <form [formGroup]="formLogin" (ngSubmit)="sendLogin()">
+                    <input class="form-control" type="text" placeholder="Login" formControlName="login" [ngClass]="{'is-invalid': !formLogin.controls.login.valid && formLogin.controls.login.touched}">
+
+                    <input class="form-control" type="password" placeholder="Senha" formControlName="password" [ngClass]="{'is-invalid': !formLogin.controls.password.valid && formLogin.controls.password.touched}">
+        
+                    <button type="submit" class="btn btn-primary btn-block" [disabled]="!formLogin.controls.login.valid || !formLogin.controls.password.valid">Enviar</button>
+            </form>
+            <a >Esqueci minha senha</a>
+            <div class="loading" *ngIf="loading">
+                    <div class="spinner-border text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                    </div>
+            </div>
+            <div *ngIf="erroLogin" class="alert alert-danger" role="alert">
+                    {{messageErro}}
+            </div>
+        </div>
+</div>

@@ -1,0 +1,41 @@
+#container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 100%;
+  }
+  
+  .form-login {
+    width: 100%;
+    max-width: 600px;
+    min-width: 400px;
+    min-height: 400px;
+    padding: 15px;
+    margin: auto;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(194,194,194,1);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(194,194,194,1);
+    box-shadow: 0px 0px 12px 0px rgba(194,194,194,1);
+    text-align: center;
+  }
+
+  input {
+    margin: 10px 0;
+  }
+
+  .logo {
+    margin: 10px;
+  }
+
+  .alert {
+    margin-top: 10px;
+  }
+
+  .loading {
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }

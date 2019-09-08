@@ -1,13 +1,14 @@
-<div class="global">
+<div [ngClass]="{'global': !isLogin}">
   
-  <app-sidebar>
+  <app-sidebar *ngIf="!isLogin">
   </app-sidebar>
   
-  <div class="groupRight">
-    <app-navtop></app-navtop>
+  <div class="" [ngClass]="{'groupRight': !isLogin, 'container': isLogin}">
+    <app-navtop *ngIf="!isLogin"></app-navtop>
     
-        <main class="">
+        <main [ngClass]="{'form-login': isLogin}">
           <div class="content">
+              <!-- isLogin == {{isLogin}} -->
           <router-outlet></router-outlet>
         </div>
 
