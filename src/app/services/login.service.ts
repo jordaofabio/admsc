@@ -17,4 +17,12 @@ export class LoginService {
     };
     return this.http.post(url, data);
   }
+
+  newPass(email: string) {
+    const url = `${environment.API_URL}/auth/reset`;
+    const data = {
+      email
+    };
+    return this.http.post(url, data);
+  }
 }

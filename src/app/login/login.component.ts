@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
@@ -8,29 +8,34 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewChecked {
+export class LoginComponent implements OnInit {
 
   login: string;
   password: string;
   formLogin: FormGroup;
+  formForgotPass: FormGroup;
   erroLogin = false;
   loading = false;
   messageErro: string;
-
+  forgotWindow = false;
+  successForgot = false;
+  messageForgotSucess: string;
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.createForm(this.login, this.password);
   }
 
-  ngAfterViewChecked(): void {
-    // this.router.navigate(['/']);
-  }
-
   createForm(login: string, password: string) {
     this.formLogin = this.formBuilder.group({
       login: [login, [Validators.required]],
       password: [password, [Validators.required]]
+    });
+  }
+
+  createFormForgotPass(login: string) {
+    this.formForgotPass = this.formBuilder.group({
+      login: [login, [Validators.required]],
     });
   }
 
@@ -54,6 +59,31 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     }
    );
 
+  }
+
+  sendForgotPass() {
+    this.loading = true;
+    this.login = this.formForgotPass.value.login;
+    this.loginService.newPass(this.login).subscribe(
+      (ret: any) => {
+        this.loading = false;
+        if (ret.success) {
+          this.successForgot = true;
+          this.messageForgotSucess = ret.message;
+        } else {
+          this.messageErro = ret.message;
+          this.erroLogin = true;
+        }
+
+      }
+     );
+  }
+
+  forgotPass() {
+    this.forgotWindow = !this.forgotWindow;
+    if (this.forgotWindow) {
+     this.createFormForgotPass(this.login);
+    }
   }
 
 }
