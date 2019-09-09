@@ -1,0 +1,28 @@
+<div id="container">
+    <div  class="form-login">
+            <img src="assets/images/logo.png" class="logo" />
+
+        <form [formGroup]="formNewPass" (ngSubmit)="sendNewPass()">
+
+            <input class="form-control" type="password" placeholder="Nova Senha" formControlName="password" [ngClass]="{'is-invalid': !formNewPass.controls.password.valid && formNewPass.controls.password.touched}">
+            <input class="form-control" type="password" placeholder="Repita a Nova Senha" formControlName="repeatPassword" [ngClass]="{'is-invalid': !formNewPass.controls.repeatPassword.valid && formNewPass.controls.repeatPassword.touched}">
+    
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="!formNewPass.controls.repeatPassword.valid || !formNewPass.controls.password.valid">Enviar</button>
+        </form>
+
+       
+
+        <div class="loading" *ngIf="loading">
+                <div class="spinner-border text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                </div>
+        </div>
+
+        <div *ngIf="successChanged" class="alert alert-success" role="alert">
+                    {{messageSucess}} <a routerLink="/login">Ir para o login.</a>
+            </div>
+        <div *ngIf="erroLogin" class="alert alert-danger" role="alert">
+                {{messageErro}}
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
+    UsersService.isLogin.emit(true);
     this.createForm(this.login, this.password);
   }
 
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
 
       if (ret.token) {
         sessionStorage.setItem('scToken', ret.token);
+        UsersService.isLogin.emit(false);
         this.router.navigate(['dashboard']);
       } else {
         this.messageErro = ret.message;
@@ -63,6 +66,9 @@ export class LoginComponent implements OnInit {
 
   sendForgotPass() {
     this.loading = true;
+    this.erroLogin = false;
+    this.successForgot = false;
+
     this.login = this.formForgotPass.value.login;
     this.loginService.newPass(this.login).subscribe(
       (ret: any) => {

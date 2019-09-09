@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'posts', loadChildren: './posts/posts.module#PostsModule'},
   { path: 'cartinhas', loadChildren: './cartinhas/cartinhas.module#CartinhasModule'},
   { path: 'login', loadChildren: './login/login.module#LoginModule'},
+  { path: 'newpass', loadChildren: './newpass/newpass.module#NewpassModule'},
 ];
 
 @NgModule({

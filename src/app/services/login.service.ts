@@ -25,4 +25,12 @@ export class LoginService {
     };
     return this.http.post(url, data);
   }
+
+  setNewPass(password: string) {
+    const url = `${environment.API_URL}/user/newpass`;
+    const data = {
+      password
+    };
+    return this.http.post(url, data);
+  }
 }
