@@ -1,1 +1,56 @@
-<p>cartinhas works!</p>
+<h1>Cartinhas</h1>
+<span class="add"> <a [routerLink]="['/cartinhas/new']" class="btn btn-primary btn-sm">Nova Cartinha <i class="fas fa-envelope-open-text fa-sm"></i></a>
+</span>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Criança</th>
+        <th scope="col">Instituição</th>
+        <th scope="col">Presente</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartinha of cartinhas; let i=index">
+        <td>
+            {{cartinha.crianca}}
+          </td>
+          <td>
+            {{cartinha.instituicao}}
+          </td>
+          <td>
+            {{cartinha.presente}}
+          </td>
+          <td>
+            {{cartinha.enabled ? 'Livre' : 'Adotada'}}
+          </td> 
+          <td  class="text-right">
+            <a *ngIf="activeUser.access < 2" routerLink="/cartinhas/edit/{{cartinha.id}}" class="cartinha-actions edit"><i class="fas fa-pen"></i></a>
+            <a *ngIf="activeUser.access < 2 && cartinha.enabled" (click)="Confirm(cartinha)" href="" data-toggle="modal" data-target="#ModalConfirm" class="cartinha-actions delete"><i class="fas fa-trash"></i></a>
+          </td> 
+      </tr>
+      
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="Confirmação" attr.aria-hidden="{{hideModal}}">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalConfirmCenterTitle">Confirmação</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirme a exclusão da cartinha da criança "{{confirmCartinha.crianca}}"?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="deleteCartinha()" data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

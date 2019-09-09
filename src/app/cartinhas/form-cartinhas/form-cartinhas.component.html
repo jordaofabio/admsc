@@ -1,1 +1,39 @@
-<p>form-cartinhas works!</p>
+<form [formGroup]="formCartinha" >
+    <input type="hidden" class="form-control" name="id" formControlName="id">
+  
+      <div class="form-group">
+        <label for="exampleInputEmail1">Criança</label>
+        <input type="text" class="form-control" name="crianca" formControlName="crianca" placeholder="Criança">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Instituição</label>
+        <input type="text" class="form-control" name="instituicao" formControlName="instituicao" placeholder="Instituição">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Presente</label>
+        <input type="text" class="form-control" name="presente" formControlName="presente" placeholder="Presente">
+      </div>
+      <div class="form-group">
+        <label for="texto">Texto</label>
+        <textarea class="form-control" id="texto" formControlName="texto" name="texto" rows="3"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="img">Imagem da cartinha</label>
+        <p *ngIf="fotoCartinha"><a href="{{linkImgCartinha}}" target="_blank">{{fotoCartinha}}</a></p>
+        <file-upload formControlName="img"></file-upload>
+      </div>
+      <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+      <div class="loading" *ngIf="loading">
+        <div class="spinner-border text-info" role="status">
+                <span class="sr-only">Loading...</span>
+        </div>
+        </div>
+      <div *ngIf="success" class="alert alert-success" role="alert">
+        {{message}}
+    </div>
+    <div *ngIf="erroEnvio" class="alert alert-danger" role="alert">
+        {{message}}
+    </div>
+    </form>
+  

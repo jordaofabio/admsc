@@ -9,6 +9,7 @@ import { User, ConfirmUser } from '../models/user.model';
 })
 export class UsersComponent implements OnInit {
 
+  activeUser = UsersService.activeUser;
   users: User[];
   confirmUser: ConfirmUser;
   hideModal = true;
