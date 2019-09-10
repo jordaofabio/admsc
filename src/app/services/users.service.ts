@@ -13,7 +13,18 @@ export class UsersService {
 
   static isLogin: EventEmitter<boolean> = new EventEmitter();
 
-  static activeUser: ActiveUser = jwtDecode(sessionStorage.getItem('scToken'));
+
+  static userUndefined: ActiveUser = {
+      id: 0,
+      name: '',
+      email: '',
+      access: 99
+  };
+
+  static activeUser: ActiveUser = sessionStorage.getItem('scToken') ?
+                    jwtDecode(sessionStorage.getItem('scToken')) :
+                    UsersService.userUndefined;
+
 
   urlDefault = `${environment.API_URL}/user`;
 

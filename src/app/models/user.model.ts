@@ -7,6 +7,7 @@ export class User {
     photo: File | null;
     password: string | null;
     level: number | null;
+    'access_level': number | null;
     enabled: boolean;
 
 }

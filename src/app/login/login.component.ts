@@ -86,6 +86,8 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPass() {
+    this.erroLogin = false;
+    this.successForgot = false;
     this.forgotWindow = !this.forgotWindow;
     if (this.forgotWindow) {
      this.createFormForgotPass(this.login);

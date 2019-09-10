@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { AccessLevelsService } from 'src/app/services/access-levels.service';
 import { AccessLevel } from 'src/app/models/access-level.model';
 import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-form-user',
@@ -17,18 +18,27 @@ export class FormUserComponent implements OnInit {
 
   user: User;
   formUser: FormGroup;
+  formChangePass: FormGroup;
   private filesControl: FormControl = new FormControl(null, FileUploadValidators.filesLimit(1));
   fileData: File;
   levels: AccessLevel[];
   idUser: number;
   type = 'new';
   isChecked = true;
+  success = false;
+  erroEnvio = false;
+  loading = false;
+  openedChangePass = false;
+  message: string;
+  selectedUser: User;
+  activeUser = UsersService.activeUser;
 
   constructor(private http: HttpClient,
               private userService: UsersService,
               private route: ActivatedRoute,
               private accesLevelsService: AccessLevelsService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private loginService: LoginService) {
       this.createForm();
 
    }
@@ -38,6 +48,7 @@ export class FormUserComponent implements OnInit {
       this.idUser = parseInt(this.route.snapshot.paramMap.get('idUser'), 10);
       this.userService.getUser(this.idUser).subscribe((u: any) => {
         this.setUser(u);
+        this.selectedUser = u;
       });
     }
     this.accesLevelsService.getLevels().subscribe((x: AccessLevel[]) => this.levels = x);
@@ -55,6 +66,16 @@ export class FormUserComponent implements OnInit {
       photo: this.filesControl,
       level: [this.user.level, [Validators.required]],
       enabled: [this.user.enabled]
+    });
+  }
+
+  createFormNewPass() {
+    this.user = !this.user ? new User() : this.user;
+    this.filesControl = new FormControl(null, FileUploadValidators.filesLimit(1));
+    this.formChangePass = this.formBuilder.group({
+      oldPassword: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      repeatPassword: ['', [Validators.required]],
     });
   }
 
@@ -76,16 +97,21 @@ export class FormUserComponent implements OnInit {
     if (this.type === 'new') {
       this.userService.postUser(uploadData).subscribe(
         (ret: any) => {
-          this.filesControl.setValue([]);
-          this.createForm();
+          if (ret.id) {
+            this.selectedUser = ret;
+            this.filesControl.setValue([]);
+            this.createForm();
+          }
         }
       );
     } else {
       this.userService.putUser(uploadData).subscribe(
         (ret: any) => {
-          console.log(ret);
-          this.filesControl.setValue([]);
-          this.setUser(ret);
+          if (ret.id) {
+                this.selectedUser = ret;
+                this.filesControl.setValue([]);
+                this.setUser(ret);
+          }
         }
       );
     }
@@ -102,6 +128,67 @@ export class FormUserComponent implements OnInit {
     this.user.level = u.access_level;
     this.isChecked = u.enabled;
     this.createForm();
+  }
+
+  openChangePass() {
+    this.success = false;
+    this.erroEnvio = false;
+    this.loading = false;
+    this.openedChangePass = !this.openedChangePass;
+
+    if (this.openedChangePass) {
+      this.createFormNewPass();
+    }
+  }
+
+  submitChangePass() {
+    this.success = false;
+    this.erroEnvio = false;
+    this.loading = true;
+    const oldPassword = this.formChangePass.get('oldPassword').value;
+    const newPassword = this.formChangePass.get('password').value;
+    const repeatNewPassword = this.formChangePass.get('repeatPassword').value;
+
+    if (newPassword !== repeatNewPassword) {
+      this.loading = false;
+      this.message = 'As senhas não conferem.';
+      this.erroEnvio = true;
+      return false;
+    } else {
+      this.loginService.setLogin(this.selectedUser.email, oldPassword).subscribe(
+        (ret: any) => {
+
+          if (ret.token) {
+            sessionStorage.setItem('scToken', ret.token);
+          } else {
+            this.loading = false;
+            this.message = 'A senha atual está incorreta';
+            this.erroEnvio = true;
+            return false;
+          }
+
+          const uploadData = new FormData();
+          uploadData.append('id', this.selectedUser.id.toString());
+          uploadData.append('level', this.selectedUser.access_level.toString());
+          uploadData.append('enabled', this.selectedUser.enabled.toString());
+          uploadData.append('firstname', this.selectedUser.firstname);
+          uploadData.append('lastname', this.selectedUser.lastname);
+          uploadData.append('email', this.selectedUser.email);
+          uploadData.append('phone', this.selectedUser.phone);
+          uploadData.append('password', newPassword);
+          this.userService.putUser(uploadData).subscribe(
+            (ret2: any) => {
+              if (ret2.id) {
+                this.success = true;
+                this.message = 'Senha alterada com sucesso.';
+              }
+              this.loading = false;
+            }
+          );
+
+        }
+       );
+    }
   }
 
 }

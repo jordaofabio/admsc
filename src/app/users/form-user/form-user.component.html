@@ -1,4 +1,7 @@
-<form [formGroup]="formUser" > <!-- (ngSubmit)="enviar()"> -->
+<div class="nav-page">
+  <span class="link" (click)="openChangePass()" *ngIf="selectedUser.id === activeUser.id">Alterar minha senha</span> 
+</div>
+<form [formGroup]="formUser" *ngIf="!openedChangePass"> <!-- (ngSubmit)="enviar()"> -->
   <input type="hidden" class="form-control" name="id" formControlName="id">
 
     <div class="form-group">
@@ -31,5 +34,36 @@
       <input type="checkbox" formControlName="enabled" class="form-check-input" [checked]="isChecked" id="enabled">
       <label class="form-check-label" for="enabled">Ativo</label>
     </div>
-    <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary btn-block">Enviar</button>
   </form>
+
+
+  <form [formGroup]="formChangePass" *ngIf="openedChangePass"> 
+    <input type="hidden" class="form-control" name="id" formControlName="id">
+  
+      <div class="form-group">
+        <label for="exampleInputEmail1">Senha Atual</label>
+        <input class="form-control" type="password" placeholder="Senha Atual" formControlName="oldPassword" [ngClass]="{'is-invalid': !formChangePass.controls.oldPassword.valid && formChangePass.controls.oldPassword.touched}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Nova Senha</label>
+        <input class="form-control" type="password" placeholder="Nova Senha" formControlName="password" [ngClass]="{'is-invalid': !formChangePass.controls.password.valid && formChangePass.controls.password.touched}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Repita a Nova Senha</label>
+        <input class="form-control" type="password" placeholder="Repita a Nova Senha" formControlName="repeatPassword" [ngClass]="{'is-invalid': !formChangePass.controls.repeatPassword.valid && formChangePass.controls.repeatPassword.touched}">
+      </div>
+            <button type="submit" (click)="submitChangePass()" class="btn btn-primary btn-block" [disabled]="!formChangePass.controls.repeatPassword.valid || !formChangePass.controls.password.valid || !formChangePass.controls.oldPassword.valid">Enviar</button>
+    </form>
+
+    <div class="loading" *ngIf="loading">
+      <div class="spinner-border text-info" role="status">
+              <span class="sr-only">Loading...</span>
+      </div>
+      </div>
+    <div *ngIf="success" class="alert alert-success" role="alert">
+      {{message}}
+  </div>
+  <div *ngIf="erroEnvio" class="alert alert-danger" role="alert">
+      {{message}}
+  </div>
