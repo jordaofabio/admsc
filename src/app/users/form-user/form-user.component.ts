@@ -8,6 +8,7 @@ import { AccessLevelsService } from 'src/app/services/access-levels.service';
 import { AccessLevel } from 'src/app/models/access-level.model';
 import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-form-user',
@@ -38,20 +39,29 @@ export class FormUserComponent implements OnInit {
               private route: ActivatedRoute,
               private accesLevelsService: AccessLevelsService,
               private formBuilder: FormBuilder,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private location: Location) {
       this.createForm();
 
    }
 
   ngOnInit() {
-    if (this.route.snapshot.paramMap.get('idUser')) {
-      this.idUser = parseInt(this.route.snapshot.paramMap.get('idUser'), 10);
-      this.userService.getUser(this.idUser).subscribe((u: any) => {
-        this.setUser(u);
-        this.selectedUser = u;
-      });
+    if (this.location.path().indexOf('/my-account') > -1) {
+      this.selectUser(this.activeUser.id);
     }
+
+    if (this.route.snapshot.paramMap.get('idUser')) {
+      this.selectUser(parseInt(this.route.snapshot.paramMap.get('idUser'), 10));
+    }
+
     this.accesLevelsService.getLevels().subscribe((x: AccessLevel[]) => this.levels = x);
+  }
+
+  selectUser(id: number) {
+    this.userService.getUser(id).subscribe((u: any) => {
+      this.setUser(u);
+      this.selectedUser = u;
+    });
   }
 
   createForm() {

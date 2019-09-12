@@ -21,9 +21,13 @@ export class UsersService {
       access: 99
   };
 
-  static activeUser: ActiveUser = sessionStorage.getItem('scToken') ?
-                    jwtDecode(sessionStorage.getItem('scToken')) :
-                    UsersService.userUndefined;
+  static activeUser: ActiveUser;
+
+  static setActiveUser() {
+    UsersService.activeUser = sessionStorage.getItem('scToken') ?
+    jwtDecode(sessionStorage.getItem('scToken')) :
+    UsersService.userUndefined;
+  }
 
 
   urlDefault = `${environment.API_URL}/user`;

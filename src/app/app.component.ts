@@ -18,7 +18,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     UsersService.isLogin.subscribe(ret => this.isLogin = ret);
     this.checkRouterLogin();
-  }
+    UsersService.setActiveUser();
+}
 
   ngAfterViewChecked(): void {
   }

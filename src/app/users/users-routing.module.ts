@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: '', component: UsersComponent },
     { path: 'new', component: FormUserComponent },
     { path: 'edit/:idUser', component: FormUserComponent},
+    { path: 'my-account', component: FormUserComponent},
   ] }
 ];
 
