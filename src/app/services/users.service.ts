@@ -9,7 +9,9 @@ import { ActiveUser } from '../models/activeUser.models';
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    UsersService.setActiveUser();
+  }
 
   static isLogin: EventEmitter<boolean> = new EventEmitter();
 
@@ -23,6 +25,8 @@ export class UsersService {
 
   static activeUser: ActiveUser;
 
+  urlDefault = `${environment.API_URL}/user`;
+
   static setActiveUser() {
     UsersService.activeUser = sessionStorage.getItem('scToken') ?
     jwtDecode(sessionStorage.getItem('scToken')) :
@@ -30,7 +34,6 @@ export class UsersService {
   }
 
 
-  urlDefault = `${environment.API_URL}/user`;
 
   getUsers() {
     return this.http.get(this.urlDefault);

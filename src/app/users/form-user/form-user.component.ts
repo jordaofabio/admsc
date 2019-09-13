@@ -33,6 +33,7 @@ export class FormUserComponent implements OnInit {
   message: string;
   selectedUser: User;
   activeUser = UsersService.activeUser;
+  isCurrentUser = false;
 
   constructor(private http: HttpClient,
               private userService: UsersService,
@@ -54,7 +55,15 @@ export class FormUserComponent implements OnInit {
       this.selectUser(parseInt(this.route.snapshot.paramMap.get('idUser'), 10));
     }
 
+    this.verifyIsCurrentUser();
+
     this.accesLevelsService.getLevels().subscribe((x: AccessLevel[]) => this.levels = x);
+  }
+
+  verifyIsCurrentUser() {
+    if (this.selectedUser) {
+      this.isCurrentUser = this.selectedUser.id === this.activeUser.id;
+    }
   }
 
   selectUser(id: number) {
@@ -90,6 +99,9 @@ export class FormUserComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.success = false;
+    this.erroEnvio = false;
+    this.loading = true;
     const uploadData = new FormData();
     uploadData.append('id', this.formUser.get('id').value);
     uploadData.append('firstname', this.formUser.get('firstname').value);
@@ -107,24 +119,46 @@ export class FormUserComponent implements OnInit {
     if (this.type === 'new') {
       this.userService.postUser(uploadData).subscribe(
         (ret: any) => {
+          this.loading = false;
           if (ret.id) {
             this.selectedUser = ret;
             this.filesControl.setValue([]);
             this.createForm();
+            this.success = true;
+            this.message = 'Usuário cadastrado com sucesso.';
+          } else {
+            const message = ret.message ? ret.message : '';
+            this.genericMessageError(message);
           }
+        }, (erro: any) => {
+          this.genericMessageError();
         }
       );
     } else {
       this.userService.putUser(uploadData).subscribe(
         (ret: any) => {
+          this.loading = false;
           if (ret.id) {
                 this.selectedUser = ret;
                 this.filesControl.setValue([]);
                 this.setUser(ret);
+                this.success = true;
+                this.message = 'Alteração realizada com sucesso.';
+          } else {
+            const message = ret.message ? ret.message : '';
+            this.genericMessageError(message);
           }
+        }, (erro: any) => {
+          this.genericMessageError();
         }
       );
     }
+  }
+
+  genericMessageError(message: string = '') {
+    this.loading = false;
+    this.message = message ? message : 'Ops! Ocorreu algum erro.';
+    this.erroEnvio = true;
   }
 
   setUser(u: any) {

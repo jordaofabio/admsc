@@ -1,5 +1,5 @@
-<div class="nav-page">
-  <span class="link" (click)="openChangePass()" *ngIf="selectedUser.id === activeUser.id">Alterar minha senha</span> 
+<div class="nav-page" *ngIf="isCurrentUser">
+  <span class="link" (click)="openChangePass()">Alterar minha senha</span> 
 </div>
 <form [formGroup]="formUser" *ngIf="!openedChangePass"> <!-- (ngSubmit)="enviar()"> -->
   <input type="hidden" class="form-control" name="id" formControlName="id">
