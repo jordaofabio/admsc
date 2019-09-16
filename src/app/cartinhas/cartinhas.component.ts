@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cartinha, ConfirmCartinha } from '../models/cartinha.model';
 import { CartinhasService } from '../services/cartinhas.service';
 import { UsersService } from '../services/users.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cartinhas',
@@ -14,16 +15,26 @@ export class CartinhasComponent implements OnInit {
   cartinhas: Cartinha[];
   confirmCartinha: ConfirmCartinha;
   hideModal = true;
-  constructor(private cartinhaService: CartinhasService) { }
+  page: number;
+  quantity: number;
+  totalItens: number;
+
+  constructor(
+    private route: ActivatedRoute,
+    private cartinhaService: CartinhasService
+    ) { }
 
   ngOnInit() {
+    this.page = !this.route.snapshot.paramMap.get('page') ? 1 : parseInt(this.route.snapshot.paramMap.get('page'), 10);
+    this.quantity = !this.route.snapshot.paramMap.get('quantity') ? 10 : parseInt(this.route.snapshot.paramMap.get('quantity'), 10);
     this.confirmCartinha = new ConfirmCartinha();
     this.getCartinhas();
   }
 
   getCartinhas() {
-    this.cartinhaService.getCartinhas().subscribe((ret: any) => {
+    this.cartinhaService.getCartinhas(this.page, this.quantity).subscribe((ret: any) => {
       this.cartinhas = ret.rows;
+      this.totalItens = ret.count;
     });
   }
 

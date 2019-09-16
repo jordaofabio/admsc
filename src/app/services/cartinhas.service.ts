@@ -12,8 +12,8 @@ export class CartinhasService {
 
   urlDefault = `${environment.API_URL}/product`;
 
-  getCartinhas() {
-    return this.http.get(this.urlDefault);
+  getCartinhas(page: number, quantity: number) {
+    return this.http.get(`${this.urlDefault}/page/${page}/quantity/${quantity}`);
   }
 
   getCartinha(id: number) {

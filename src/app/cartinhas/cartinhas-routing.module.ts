@@ -7,6 +7,8 @@ import { FormCartinhasComponent } from './form-cartinhas/form-cartinhas.componen
 const routes: Routes = [{
   path: '', children: [
     {path: '', component: CartinhasComponent },
+    {path: 'page/:page', component: CartinhasComponent },
+    {path: 'page/:page/quantity/:quantity', component: CartinhasComponent },
     { path: 'new', component: FormCartinhasComponent },
     { path: 'edit/:idCartinha', component: FormCartinhasComponent},
   ]

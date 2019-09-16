@@ -6,6 +6,10 @@
         <input type="text" class="form-control" name="crianca" formControlName="crianca" placeholder="Criança">
       </div>
       <div class="form-group">
+        <label for="exampleInputEmail1">Código da Criança</label>
+        <input type="text" class="form-control" name="codigo_crianca" formControlName="codigoCrianca" placeholder="Código da Criança">
+      </div>
+      <div class="form-group">
         <label for="exampleInputEmail1">Instituição</label>
         <input type="text" class="form-control" name="instituicao" formControlName="instituicao" placeholder="Instituição">
       </div>
@@ -13,17 +17,17 @@
         <label for="exampleInputEmail1">Presente</label>
         <input type="text" class="form-control" name="presente" formControlName="presente" placeholder="Presente">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="texto">Texto</label>
         <textarea class="form-control" id="texto" formControlName="texto" name="texto" rows="3"></textarea>
-      </div>
+      </div> -->
       
       <div class="form-group">
         <label for="img">Imagem da cartinha</label>
-        <p *ngIf="fotoCartinha"><a href="{{linkImgCartinha}}" target="_blank">{{fotoCartinha}}</a></p>
+        <p *ngIf="fotoCartinha" (click)="LightBox(linkImgCartinha)" class="link">Ver cartinha</p>
         <file-upload formControlName="img"></file-upload>
       </div>
-      <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+      <button type="submit" (click)="onSubmit()" class="btn btn-primary">Enviar</button>
       <div class="loading" *ngIf="loading">
         <div class="spinner-border text-info" role="status">
                 <span class="sr-only">Loading...</span>
@@ -36,4 +40,22 @@
         {{message}}
     </div>
     </form>
-  
+    <div id="modalLightBox" class="modal" [ngClass]="{'lightBoxOpened': lightBoxOpened, 'lightBoxClosed': !lightBoxOpened }">
+      <span class="close cursor" (click)="LightBox()">&times;</span>
+      <div class="modal-content">
+    
+        <div class="mySlides">
+          <img [src]="imgLightBox" style="width:100%">
+        </div>
+    
+    
+    
+        <div class="caption-container">
+          <p id="caption"></p>
+        </div>
+    
+    </div>
+    </div>
+
+
+    

@@ -8,12 +8,13 @@ import { UsersService } from './services/users.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InterceptService } from './services/intercept.service';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    NavtopComponent,
+    NavtopComponent
   ],
   imports: [
     BrowserModule,

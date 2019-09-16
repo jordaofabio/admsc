@@ -29,6 +29,8 @@ export class FormCartinhasComponent implements OnInit {
   message: string;
   linkImgCartinha: string;
   fotoCartinha: string;
+  imgLightBox: string;
+  lightBoxOpened = false;
 
   constructor(private http: HttpClient,
               private cartinhaService: CartinhasService,
@@ -54,6 +56,7 @@ export class FormCartinhasComponent implements OnInit {
     this.formCartinha = this.formBuilder.group({
       id: [this.cartinha.id],
       crianca: [this.cartinha.crianca, [Validators.required]],
+      codigoCrianca: [this.cartinha.codigoCrianca, [Validators.required]],
       presente: [this.cartinha.presente, [Validators.required]],
       instituicao: this.cartinha.instituicao,
       img: this.filesControl,
@@ -68,6 +71,7 @@ export class FormCartinhasComponent implements OnInit {
     const uploadData = new FormData();
     uploadData.append('id', this.formCartinha.get('id').value);
     uploadData.append('crianca', this.formCartinha.get('crianca').value);
+    uploadData.append('codigoCrianca', this.formCartinha.get('codigoCrianca').value);
     uploadData.append('instituicao', this.formCartinha.get('instituicao').value);
     uploadData.append('texto', this.formCartinha.get('texto').value);
     uploadData.append('presente', this.formCartinha.get('presente').value);
@@ -116,12 +120,22 @@ export class FormCartinhasComponent implements OnInit {
     this.type = 'edit';
     this.cartinha.id = c.id;
     this.cartinha.crianca = c.crianca;
+    this.cartinha.codigoCrianca = c.codigoCrianca;
     this.cartinha.instituicao = c.instituicao;
     this.cartinha.texto = c.texto;
     this.cartinha.presente = c.presente;
     this.linkImgCartinha = `${environment.PATH_CARTINHAS}/${c.img}`;
     this.fotoCartinha = `${c.img}`;
     this.createForm();
+  }
+
+
+
+
+
+  LightBox(img: string = '') {
+    this.imgLightBox = img;
+    this.lightBoxOpened = !img ? false : true;
   }
 
 }

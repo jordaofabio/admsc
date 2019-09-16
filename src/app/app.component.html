@@ -3,7 +3,7 @@
   <app-sidebar *ngIf="!isLogin">
   </app-sidebar>
   
-  <div class="" [ngClass]="{'groupRight': !isLogin, 'container': isLogin}">
+  <div class="container" [ngClass]="{'groupRight': !isLogin, 'container': isLogin}">
     <app-navtop *ngIf="!isLogin"></app-navtop>
     
         <main [ngClass]="{'form-login': isLogin}">

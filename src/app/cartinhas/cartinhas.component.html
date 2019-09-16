@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th scope="col">Criança</th>
+        <th scope="col">Código Criança</th>
         <th scope="col">Instituição</th>
         <th scope="col">Presente</th>
         <th scope="col">Status</th>
@@ -17,22 +18,26 @@
             {{cartinha.crianca}}
           </td>
           <td>
+            {{cartinha.codigoCrianca}}
+          </td>
+          <td>
             {{cartinha.instituicao}}
           </td>
           <td>
             {{cartinha.presente}}
           </td>
           <td>
-            {{cartinha.enabled ? 'Livre' : 'Adotada'}}
+            {{cartinha.enabled ? 'Livre' : 'Apadrinhada'}}
           </td> 
           <td  class="text-right">
-            <a *ngIf="activeUser.access < 2" routerLink="/cartinhas/edit/{{cartinha.id}}" class="cartinha-actions edit"><i class="fas fa-pen"></i></a>
-            <a *ngIf="activeUser.access < 2 && cartinha.enabled" (click)="Confirm(cartinha)" href="" data-toggle="modal" data-target="#ModalConfirm" class="cartinha-actions delete"><i class="fas fa-trash"></i></a>
+            <a *ngIf="activeUser.access < 2" routerLink="/cartinhas/edit/{{cartinha.id}}" class="data-list-actions edit"><i class="fas fa-pen"></i></a>
+            <a *ngIf="activeUser.access < 2 && cartinha.enabled" (click)="Confirm(cartinha)" href="" data-toggle="modal" data-target="#ModalConfirm" class="data-list-actions delete"><i class="fas fa-trash"></i></a>
           </td> 
       </tr>
       
     </tbody>
   </table>
+  <app-pagination *ngIf="totalItens" [activePage]="page" [totalItens]="totalItens" [itensPage]="quantity" ></app-pagination>
 
   <!-- Modal -->
 <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="Confirmação" attr.aria-hidden="{{hideModal}}">

@@ -1,6 +1,7 @@
 export class Cartinha {
     id: number;
     crianca: string;
+    codigoCrianca: string;
     texto?: string;
     instituicao?: string;
     presente: string;
