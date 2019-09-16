@@ -37,7 +37,7 @@
       
     </tbody>
   </table>
-  <app-pagination *ngIf="totalItens" [activePage]="page" [totalItens]="totalItens" [itensPage]="quantity" ></app-pagination>
+  <app-pagination (click)="updateItems($event)" *ngIf="totalItens" [activePage]="page" [totalItens]="totalItens" [itensPage]="quantity"></app-pagination>
 
   <!-- Modal -->
 <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="Confirmação" attr.aria-hidden="{{hideModal}}">

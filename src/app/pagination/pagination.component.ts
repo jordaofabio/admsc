@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -12,6 +12,7 @@ export class PaginationComponent implements OnInit {
   @Input() activePage: number;
   @Input() totalItens: number;
   @Input() itensPage: number;
+  @Output() click: EventEmitter<any> = new EventEmitter;
 
   next = 0;
   prev = 0;
@@ -25,7 +26,6 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger
     this.activePage = !this.activePage ? 1 : this.activePage;
     this.itensPage = !this.itensPage ? this.quantityDefault : this.itensPage;
     this.currentRoute = this.location.path().indexOf('/page/') > -1 ? this.location.path().split('/page/')[0] : this.location.path();
@@ -46,6 +46,10 @@ export class PaginationComponent implements OnInit {
         this.numbers.push(p);
       }
     }
+  }
+
+  clickPage(page) {
+    this.click.emit(page);
   }
 
 }

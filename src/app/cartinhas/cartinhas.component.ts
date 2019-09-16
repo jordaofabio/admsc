@@ -28,11 +28,11 @@ export class CartinhasComponent implements OnInit {
     this.page = !this.route.snapshot.paramMap.get('page') ? 1 : parseInt(this.route.snapshot.paramMap.get('page'), 10);
     this.quantity = !this.route.snapshot.paramMap.get('quantity') ? 10 : parseInt(this.route.snapshot.paramMap.get('quantity'), 10);
     this.confirmCartinha = new ConfirmCartinha();
-    this.getCartinhas();
+    this.getCartinhas(this.page);
   }
 
-  getCartinhas() {
-    this.cartinhaService.getCartinhas(this.page, this.quantity).subscribe((ret: any) => {
+  getCartinhas(page) {
+    this.cartinhaService.getCartinhas(page, this.quantity).subscribe((ret: any) => {
       this.cartinhas = ret.rows;
       this.totalItens = ret.count;
     });
@@ -55,5 +55,11 @@ export class CartinhasComponent implements OnInit {
         this.cartinhas.splice(this.cartinhas.findIndex(x => x.id === this.confirmCartinha.id), 1);
       }
     );
+  }
+
+  updateItems(page) {
+    if (typeof page === 'number') {
+      this.getCartinhas(page);
+    }
   }
 }
