@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --base-href /adm/ --prod --configuration production",
+    "start": "node server",
+    "postinstall": "npm run build",
+    "build": "ng build --prod --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -31,9 +32,11 @@
     "@iplab/ngx-file-upload": "^1.4.0",
     "bootstrap": "^4.3.1",
     "ckeditor5-simple-upload": "^1.0.6",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
+    "path": "^0.12.7",
     "popper.js": "^1.14.7",
     "rxjs": "~6.4.0",
     "sass-loader": "^7.1.0",
