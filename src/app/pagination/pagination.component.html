@@ -1,16 +1,15 @@
 
 <nav class="nav-pagination" *ngIf="numbers.length > 1">
     <ul class="pagination">
-      <li class="page-item"><a class="page-link" *ngIf="prev" routerLink="{{currentRoute}}/page/{{prev}}{{concatQuantity}}">
-            <span aria-hidden="true">&laquo;</span>
+      <li class="page-item page-link" *ngIf="prev" (click)="clickPrev()">
+        <span aria-hidden="true">&laquo;</span>
             <span class="sr-only">Previous</span>
-          </a>
+         
         </li>
       <li *ngFor="let number of numbers; let i = index" class="page-item" (click)="clickPage(number)"><a class="page-link">{{number}}</a></li>
-      <li class="page-item">
-        <a class="page-link" *ngIf="next" routerLink="{{currentRoute}}/page/{{next}}{{concatQuantity}}">
+      <li class="page-item page-link" *ngIf="next" (click)="clickNext()">
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Next</span>
-        </a></li>
+        </li>
     </ul>
 </nav>

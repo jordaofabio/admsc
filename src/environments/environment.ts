@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3000',
-  PATH_CARTINHAS: 'http://localhost:3000/media/uploads/cartinhas'
+  API_URL: 'http://localhost:3000/api',
+  PATH_CARTINHAS: 'http://localhost:3000/api/media/uploads/cartinhas'
 };
 

@@ -31,7 +31,7 @@ export class CartinhasComponent implements OnInit {
     this.getCartinhas(this.page);
   }
 
-  getCartinhas(page) {
+  getCartinhas(page: number) {
     this.cartinhaService.getCartinhas(page, this.quantity).subscribe((ret: any) => {
       this.cartinhas = ret.rows;
       this.totalItens = ret.count;
@@ -55,11 +55,5 @@ export class CartinhasComponent implements OnInit {
         this.cartinhas.splice(this.cartinhas.findIndex(x => x.id === this.confirmCartinha.id), 1);
       }
     );
-  }
-
-  updateItems(page) {
-    if (typeof page === 'number') {
-      this.getCartinhas(page);
-    }
   }
 }
